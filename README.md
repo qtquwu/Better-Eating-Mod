@@ -1,9 +1,12 @@
-# Fabric Example Mod
+# Better Eating
 
-## Setup
+This is a simple mod - all it adds is a configurable delay after you eat to prevent you from placing blocks or interacting with blocks
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+## API
 
-## License
+This mod also adds a callback event for whenever food is eaten, returning the player, world, and hand. In this mod, this is used to update the food timer based on the config.
+Feel free to use this code in your own projects if you wish to, with or without credit.
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+## Dependencies
+
+This mod requires the Fabric API. All other dependencies should be bundled.
