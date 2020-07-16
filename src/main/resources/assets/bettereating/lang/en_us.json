@@ -1,0 +1,5 @@
+{
+  "text.autoconfig.bettereating.title": "Better Eating Settings",
+  "text.autoconfig.bettereating.option.foodTimerLength": "Post-Eating Delay Duration",
+  "text.autoconfig.bettereating.option.foodTimerLength.@Tooltip": "Duration, in ticks, that you are prevented from doing other things"
+}
