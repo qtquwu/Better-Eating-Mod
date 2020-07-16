@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.qtq.bettereating.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "EatingTimerMixin",
+    "PreventItemUseMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
