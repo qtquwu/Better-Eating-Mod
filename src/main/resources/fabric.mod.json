@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "bettereating",
+  "version": "${version}",
+
+  "name": "Better Eating",
+  "description": "Adds a delay after eating so you don't accidentally interact with the world",
+  "authors": [
+    "QtQ"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "MIT",
+  "icon": "assets/bettereating/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.qtq.bettereating.BetterEatingMod"
+    ],
+    "modmenu": [
+      "me.qtq.bettereating.BetterEatingModMenu"
+    ]
+  },
+  "mixins": [
+    "bettereating.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
