@@ -10,7 +10,8 @@
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/better-eating-mod",
-    "sources": "https://github.com/qtquwu/Better-Eating-Mod"
+    "sources": "https://github.com/qtquwu/Better-Eating-Mod",
+    "issues": "https://github.com/qtquwu/Better-Eating-Mod/issues"
   },
 
   "license": "MIT",
