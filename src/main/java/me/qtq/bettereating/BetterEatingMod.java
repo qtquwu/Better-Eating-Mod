@@ -21,7 +21,6 @@ public class BetterEatingMod implements ModInitializer {
 
 		// This listens for consuming food and then updates the foodTimerLength on the client
 		ConsumptionCallback.EVENT.register((player, world, stack) -> {
-			//foodTimerLength = config.foodTimerLength;
 			startFoodTimer();
 			return ActionResult.PASS;
 		});
