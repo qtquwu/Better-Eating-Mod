@@ -7,7 +7,7 @@
   ],
   "client": [
     "EatingTimerMixin",
-    "PreventItemUseMixin"
+    "ClientPreventionMixin"
   ],
   "injectors": {
     "defaultRequire": 1

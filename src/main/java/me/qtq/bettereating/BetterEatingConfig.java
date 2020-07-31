@@ -9,4 +9,8 @@ public class BetterEatingConfig implements ConfigData {
     @ConfigEntry.BoundedDiscrete(min = 0, max = 20)
     @ConfigEntry.Gui.Tooltip
     public int foodTimerLength = 5;
+
+    public boolean restrictPlaceBlocks = true;
+
+    public boolean restrictUseBlocks = true;
 }
