@@ -1,8 +1,7 @@
 package me.qtq.bettereating;
 
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.*;
 
 @Config(name = "bettereating")
 public class BetterEatingConfig implements ConfigData {
