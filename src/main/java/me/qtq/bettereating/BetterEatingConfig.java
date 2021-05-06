@@ -12,4 +12,6 @@ public class BetterEatingConfig implements ConfigData {
     public boolean restrictPlaceBlocks = true;
 
     public boolean restrictUseBlocks = true;
+
+    public boolean restrictUseItems = true;
 }

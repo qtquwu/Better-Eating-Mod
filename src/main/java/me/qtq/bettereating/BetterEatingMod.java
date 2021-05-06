@@ -33,9 +33,13 @@ public class BetterEatingMod implements ModInitializer {
 	public static boolean blockUsageRestricted() {
 		return config.restrictUseBlocks;
 	}
+
+	public static boolean itemUsageRestricted() { return config.restrictUseItems;}
+
 	public static void startFoodTimer() {
 		foodTimerTicks = config.foodTimerLength;
 	}
+
 	public static void countDownFoodTimer() {
 		if (foodTimerTicks > 0) {
 			foodTimerTicks--;

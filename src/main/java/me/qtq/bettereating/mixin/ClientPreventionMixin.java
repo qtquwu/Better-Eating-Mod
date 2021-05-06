@@ -1,15 +1,14 @@
 package me.qtq.bettereating.mixin;
 
 import me.qtq.bettereating.BetterEatingMod;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,6 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ClientPlayerInteractionManager.class)
 public class ClientPreventionMixin {
+
+    // This method stops the player from placing a block if they are about to and the eating timer is active
     @Inject(at = @At("HEAD"), method = "interactBlock", cancellable = true)
     private void preventClientBlockUse(ClientPlayerEntity player, ClientWorld world, Hand hand, BlockHitResult hitresult, CallbackInfoReturnable<ActionResult> Info) {
         if(!BetterEatingMod.foodTimerDone()) {
@@ -38,6 +39,18 @@ public class ClientPreventionMixin {
                 }
             }
             if(BetterEatingMod.blockPlacementRestricted() && useItemResult && itemIsBlock) {
+                Info.setReturnValue(ActionResult.PASS);
+            }
+        }
+    }
+    // This method stops the client from using non-food items while the eating timer is counting down
+    @Inject(at = @At("HEAD"), method = "interactItem", cancellable = true)
+    private void preventClientItemUse(PlayerEntity player, World world, Hand hand, CallbackInfoReturnable<ActionResult> Info) {
+        if(!BetterEatingMod.foodTimerDone()) {
+            ItemStack itemStack = player.getStackInHand(hand);
+
+            boolean itemIsFood = itemStack.isFood();
+            if(BetterEatingMod.itemUsageRestricted() && !itemIsFood) {
                 Info.setReturnValue(ActionResult.PASS);
             }
         }
