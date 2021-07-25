@@ -5,10 +5,6 @@ import io.github.prospector.modmenu.api.ModMenuApi;
 import me.shedaniel.autoconfig.AutoConfig;
 
 public class BetterEatingModMenu implements ModMenuApi {
-    @Override
-    public String getModId() {
-        return "bettereating";
-    }
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
