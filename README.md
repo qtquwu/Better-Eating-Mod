@@ -9,4 +9,4 @@ Feel free to use this code in your own projects if you wish to, with or without 
 
 ## Dependencies
 
-This mod requires the Fabric API. All other dependencies should be bundled.
+This mod requires the Fabric API, and the Cloth Config API. ModMenu is an optional, though recommended, dependency.
