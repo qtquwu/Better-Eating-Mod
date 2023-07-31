@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ClientPlayerInteractionManager.class)
@@ -23,7 +24,7 @@ public class ClientPreventionMixin {
     @Shadow
     MinecraftClient client;
 
-    // This method stops the player from placing a block if they are about to and the eating timer is active
+    // This method stops the player from using an item on a block (including placing a block) if the config is set up to do so
     @Inject(at = @At("HEAD"), method = "interactBlock", cancellable = true)
     private void preventClientBlockUse(ClientPlayerEntity player, Hand hand, BlockHitResult hitResult, CallbackInfoReturnable<ActionResult> Info) {
         if(!BetterEatingMod.foodTimerDone()) {
@@ -47,8 +48,12 @@ public class ClientPreventionMixin {
             if(BetterEatingMod.blockPlacementRestricted() && useItemResult && itemIsBlock) {
                 Info.setReturnValue(ActionResult.PASS);
             }
+            if(BetterEatingMod.itemUsageRestricted() && useItemResult && !itemIsBlock) {
+                Info.setReturnValue(ActionResult.PASS);
+            }
         }
     }
+
     // This method stops the client from using non-food items while the eating timer is counting down
     @Inject(at = @At("HEAD"), method = "interactItem", cancellable = true)
     private void preventClientItemUse(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> Info) {

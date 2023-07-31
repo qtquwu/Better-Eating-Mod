@@ -4,6 +4,8 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.ActionResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BetterEatingMod implements ModInitializer {
 
@@ -11,6 +13,7 @@ public class BetterEatingMod implements ModInitializer {
 	private static int foodTimerTicks;
 
 	private static BetterEatingConfig config;
+	public static Logger LOGGER = LoggerFactory.getLogger("BetterEatingMod");
 
 	@Override
 	public void onInitialize() {
@@ -27,14 +30,14 @@ public class BetterEatingMod implements ModInitializer {
 	}
 
 	public static boolean blockPlacementRestricted() {
-		return config.restrictPlaceBlocks;
+		return config.restrictPlaceBlocks && !foodTimerDone();
 	}
 
 	public static boolean blockUsageRestricted() {
-		return config.restrictUseBlocks;
+		return config.restrictUseBlocks && !foodTimerDone();
 	}
 
-	public static boolean itemUsageRestricted() { return config.restrictUseItems;}
+	public static boolean itemUsageRestricted() { return config.restrictUseItems && !foodTimerDone();}
 
 	public static void startFoodTimer() {
 		foodTimerTicks = config.foodTimerLength;

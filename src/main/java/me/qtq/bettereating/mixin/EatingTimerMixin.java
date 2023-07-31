@@ -24,14 +24,17 @@ public class EatingTimerMixin {
 			info.cancel();
 		}
 	}
+	// The below code removed because "shouldCancelInteraction" is used for a lot more than what I thought
+
 	// This prevents the user from interacting with blocks immediately after eating
-	@Inject(at = @At("RETURN"), method = "shouldCancelInteraction", cancellable = true)
+	/*@Inject(at = @At("RETURN"), method = "shouldCancelInteraction", cancellable = true)
 	private void stopFromInteracting(CallbackInfoReturnable<Boolean> info) {
-		if (!BetterEatingMod.foodTimerDone() && BetterEatingMod.blockUsageRestricted()) {
+		if (BetterEatingMod.blockUsageRestricted()) {
 			info.setReturnValue(true);
 		}
 	}
-	// This is perhaps the most essential method: it counts down the food timer every tick the player experiences
+	*/
+	// This method counts down the food timer every tick the player experiences
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void countDownFoodTimer(final CallbackInfo info) {
 		BetterEatingMod.countDownFoodTimer();
