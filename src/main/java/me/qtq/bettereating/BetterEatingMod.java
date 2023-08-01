@@ -7,6 +7,8 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -67,25 +69,26 @@ public class BetterEatingMod implements ModInitializer {
 		return !(foodTimerTicks > 0);
 	}
 
+
 	/* I discovered that the fabric API has listeners for exactly the events I'm looking at (UseItem, UseBlock, UseEntity)
 	 * So, this makes the design significantly better!
 	 */
 	private static void registerListeners() {
 
+		// UseItemCallback affects item usage that is independent of a block (think ender pearls, food, armor, fishing rods, etc.)
 		UseItemCallback.EVENT.register((player, world, hand) ->
 		{
-			// Don't stop the usage of food or other exempt items (such as shields)
+			// don't waste time processing if the food timer isn't active anyway
+			if (BetterEatingMod.foodTimerDone())
+				return TypedActionResult.pass(ItemStack.EMPTY);
+
 			ItemStack itemStack = player.getStackInHand(hand);
-			if (ItemUsePreventionManager.itemIsExempt(itemStack)) {
-				return TypedActionResult.pass(itemStack);
-			}
-			if (BetterEatingMod.itemUsageRestricted()) {
-				LOGGER.info("action rejected (location 4)");
-				LOGGER.info("rejected item: " + itemStack.getTranslationKey());
+
+			// Don't stop the usage of food or other exempt items (such as shields)
+			if (BetterEatingMod.itemUsageRestricted() && !ItemUsePreventionManager.itemIsExempt(itemStack)) {
 				return TypedActionResult.fail(itemStack);
 			}
 			return TypedActionResult.pass(itemStack);
-
 		});
 		// UseBlockCallback involves 3 things: block placement, block interaction, and item usage
 		UseBlockCallback.EVENT.register((player, world, hand, hitResult) ->
