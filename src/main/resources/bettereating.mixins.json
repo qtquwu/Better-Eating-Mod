@@ -6,8 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "EatingTimerMixin",
-    "ClientPreventionMixin"
+    "EatingTimerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
