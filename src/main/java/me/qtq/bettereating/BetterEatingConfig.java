@@ -14,4 +14,6 @@ public class BetterEatingConfig implements ConfigData {
     public boolean restrictUseBlocks = true;
 
     public boolean restrictUseItems = true;
+
+    public boolean restrictEntityInteraction = true;
 }
